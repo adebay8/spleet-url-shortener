@@ -1,0 +1,23 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "An API service that converts long url links into very short urls that are easy to share.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adebay8/spleet-url-shortener.git"
+  },
+  "keywords": [
+    "url",
+    "shortener"
+  ],
+  "author": "Onuchukwu Adebayo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adebay8/spleet-url-shortener/issues"
+  },
+  "homepage": "https://github.com/adebay8/spleet-url-shortener#readme"
+}
