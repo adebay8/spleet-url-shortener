@@ -6,7 +6,7 @@ import { addressService } from "../services/address.service";
 function addressRoutes(app: Express, db: Connection) {
   app.get(
     "/:urlCode",
-    async (req: Request, res: Response): Promise<Response> => {
+    async (req: Request, res: Response): Promise<Response | void> => {
       const response = await addressService.getAddress(req.params.urlCode);
 
       if (!response.success) {
@@ -14,7 +14,8 @@ function addressRoutes(app: Express, db: Connection) {
           .status(400)
           .json({ status: "error", message: response.message });
       }
-      return res.status(200).json(response);
+
+      return res.redirect(response.data?.longUrl!);
     }
   );
 

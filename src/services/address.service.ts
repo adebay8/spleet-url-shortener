@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
-import { Connection } from "typeorm";
 import { Address } from "../database/entity/Address";
-import { IData, IError, IUrlCode, responseType } from "../types/address.types";
+import { IData, responseType } from "../types/address.types";
 
 class AddressService {
   // pro db: Connection | null = null;
@@ -10,12 +9,28 @@ class AddressService {
   //   this.db = connection;
   // }
 
+  private baseUrl =
+    process.env.NODE_ENV === "production"
+      ? "https://spleet-url-shortener.herokuapp.com"
+      : "http://localhost:1337";
+
   public async createAddress(data: IData): Promise<responseType> {
     const generatedId = nanoid(10);
 
     try {
+      //check if generated Id already exists
+      const existingAddress = await this.getAddress(generatedId);
+
+      if (existingAddress.success) {
+        return {
+          success: false,
+          message: "Please try again",
+        };
+      }
+
+      // create new address mapping
       const address = new Address();
-      address.shortUrl = `https://localhost:1337/${generatedId}`;
+      address.shortUrl = `${this.baseUrl}/${generatedId}`;
       address.longUrl = data.url;
       address.urlCode = generatedId;
       await address.save();
@@ -25,7 +40,7 @@ class AddressService {
       };
     } catch (e) {
       return {
-        success: true,
+        success: false,
         message: "Data could not be saved",
       };
     }
@@ -46,7 +61,7 @@ class AddressService {
       };
     } catch (e) {
       return {
-        success: true,
+        success: false,
         message: "Request failed",
       };
     }

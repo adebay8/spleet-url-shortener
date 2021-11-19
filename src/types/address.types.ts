@@ -7,6 +7,7 @@ export interface IData {
 export interface IError {
   success: Boolean;
   message: string;
+  data?: Address;
 }
 
 export interface ISuccess {
