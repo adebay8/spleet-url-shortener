@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { Connection } from "typeorm";
 import { Address } from "../database/entity/Address";
-import { IData, IUrlCode } from "../types/address.types";
+import { IData, IError, IUrlCode, responseType } from "../types/address.types";
 
 class AddressService {
   // pro db: Connection | null = null;
@@ -10,7 +10,7 @@ class AddressService {
   //   this.db = connection;
   // }
 
-  public async createAddress(data: IData): Promise<Address | undefined> {
+  public async createAddress(data: IData): Promise<responseType> {
     const generatedId = nanoid(10);
 
     try {
@@ -19,18 +19,36 @@ class AddressService {
       address.longUrl = data.url;
       address.urlCode = generatedId;
       await address.save();
-      return address;
+      return {
+        success: true,
+        data: address,
+      };
     } catch (e) {
-      console.log("error", e);
+      return {
+        success: true,
+        message: "Data could not be saved",
+      };
     }
   }
 
-  public async getAddress(urlCode: string) {
+  public async getAddress(urlCode: string): Promise<responseType> {
     try {
       const addressData = await Address.findOne({ urlCode });
-      return addressData;
+      if (addressData === undefined) {
+        return {
+          success: false,
+          message: "Data not found",
+        };
+      }
+      return {
+        success: true,
+        data: addressData,
+      };
     } catch (e) {
-      console.log("error: ", e);
+      return {
+        success: true,
+        message: "Request failed",
+      };
     }
   }
 }
