@@ -1,6 +1,5 @@
 import "reflect-metadata";
 import { createConnection, Connection } from "typeorm";
-import config from "config";
 
 class Database {
   public connection: Connection | null = null;

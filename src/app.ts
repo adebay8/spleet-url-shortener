@@ -1,10 +1,9 @@
 import "reflect-metadata";
 import express from "express";
-import config from "config";
 import { db } from "./database/connect";
 import addressRoutes from "./api/address.route";
 
-const port = config.get<number>("port");
+const port = process.env.PORT || 1337;
 
 const app = express();
 
