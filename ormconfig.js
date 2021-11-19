@@ -1,5 +1,5 @@
-import PostgressConnectionStringParser from "pg-connection-string";
-import dotenv from "dotenv";
+const PostgressConnectionStringParser = require("pg-connection-string");
+const dotenv = require("dotenv");
 dotenv.config();
 
 function getProdOptions() {
@@ -18,7 +18,7 @@ function getProdOptions() {
     return typeOrmOptions;
   }
 }
-function envString<T>(prodString: T, devString: T): T {
+function envString(prodString, devString) {
   return process.env.NODE_ENV === "production" ? prodString : devString;
 }
 
@@ -32,12 +32,30 @@ module.exports = {
   database: envString(getProdOptions()?.database, process.env.DB_NAME),
   synchronize: true,
   logging: false,
-  entities: ["src/database/entity/**/*.ts"],
-  migrations: ["src/database/migration/**/*.ts"],
-  subscribers: ["src/database/subscriber/**/*.ts"],
+  entities: [
+    envString("build/database/entity/**/*.js", "src/database/entity/**/*.ts"),
+  ],
+  migrations: [
+    envString(
+      "build/database/migration/**/*.js",
+      "src/database/migration/**/*.ts"
+    ),
+  ],
+  subscribers: [
+    envString(
+      "build/database/subscriber/**/*.js",
+      "src/database/subscriber/**/*.ts"
+    ),
+  ],
   cli: {
-    entitiesDir: "src/database/entity",
-    migrationsDir: "src/database/migration",
-    subscribersDir: "src/database/subscriber",
+    entitiesDir: envString("build/database/entity", "src/database/entity"),
+    migrationsDir: envString(
+      "build/database/migration",
+      "src/database/migration"
+    ),
+    subscribersDir: envString(
+      "build/database/subscriber",
+      "src/database/subscriber"
+    ),
   },
 };
