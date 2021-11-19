@@ -32,6 +32,9 @@ module.exports = {
   database: envString(getProdOptions()?.database, process.env.DB_NAME),
   synchronize: true,
   logging: false,
+  extra: {
+    ssl: "true",
+  },
   entities: [
     envString("build/database/entity/**/*.js", "src/database/entity/**/*.ts"),
   ],
