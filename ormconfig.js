@@ -33,7 +33,7 @@ module.exports = {
   synchronize: true,
   logging: false,
   extra: {
-    ssl: "true",
+    ssl: envString(true, false),
   },
   entities: [
     envString("build/database/entity/**/*.js", "src/database/entity/**/*.ts"),
