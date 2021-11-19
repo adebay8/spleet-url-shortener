@@ -25,13 +25,19 @@ To use this application, follow these steps:
 
 5. Using Post Man, with BASE URL as `http://localhost:1337/` or `https://spleet-url-shortener.herokuapp.com/`
 
-   To **SHORTEN** a new url link, make a POST request to `/shorten`
-   with payload
+   To **SHORTEN** a new url link, make a POST request to `/shorten` with payload
    {
    "url":`<your_url_link>`
    }
 
-   To **GET** full link to a shotened url
-   Visit`<base_url>/<short_url>` in your browser, if the url exists you will be redirected to the appropriate link
+   - Reponse data contains:
+     - shortUrl
+     - longUrl
+     - urlCode
+     - id
+     - created_at
+     - updated_at
 
-6.
+   To **GET** full link to a shotened url
+
+   - Copy the short url and paste in your broswer, if the url exists you will be redirected to the corresponding page
