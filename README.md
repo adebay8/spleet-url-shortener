@@ -17,15 +17,17 @@ To use this application, follow these steps:
    - DB_PASSWORD
    - DB_PORT
    - DB_NAME
+   - DB_TYPE (`postgres`, `mysql`)
 
 4. Run `npm run dev`
 
-5. Using Post Man, `http://localhost:1337/`
+5. Using Post Man, with BASE URL as `http://localhost:1337/`
 
    To **GET** full link to a shotened url
    Visit`http://localhost:1337/<short_url>` in your browser, if the url exists you will be redirected to the appropriate link
 
-   To **shorten** a new url link, make a POST request to `http://localhost:1337/shorten`
-   with payload {
+   To **SHORTEN** a new url link, make a POST request to `http://localhost:1337/shorten`
+   with payload
+   {
    "url":`<your_url_link>`
-   } to the above url
+   }

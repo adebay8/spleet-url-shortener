@@ -18,13 +18,13 @@ function getProdOptions() {
     return typeOrmOptions;
   }
 }
-function envString(prodString, devString) {
+function envString<T>(prodString: T, devString: T) {
   return process.env.NODE_ENV === "production" ? prodString : devString;
 }
 
 module.exports = {
   name: "default",
-  type: "postgres",
+  type: process.env.DB_TYPE || "postgres",
   host: envString(getProdOptions()?.host, process.env.DB_HOST),
   port: envString(getProdOptions()?.port, process.env.DB_PORT),
   username: envString(getProdOptions()?.username, process.env.DB_USER),
