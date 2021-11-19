@@ -18,7 +18,7 @@ function getProdOptions() {
     return typeOrmOptions;
   }
 }
-function envString<T>(prodString: T, devString: T) {
+function envString(prodString, devString) {
   return process.env.NODE_ENV === "production" ? prodString : devString;
 }
 
