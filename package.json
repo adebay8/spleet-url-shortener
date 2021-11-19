@@ -4,9 +4,9 @@
   "description": "An API service that converts long url links into very short urls that are easy to share.",
   "main": "index.ts",
   "scripts": {
-    "start": "node build/src/app.js",
+    "start": "node build/app.js",
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "build": "tsc"
+    "build": "tsc -p . && cp .env build/.env"
   },
   "repository": {
     "type": "git",
