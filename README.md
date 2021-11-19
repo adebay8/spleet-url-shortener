@@ -6,7 +6,8 @@ This is an API that provides a short url that is easily shareable from long urls
 
 This API can be used both locally and has been deployed. [click here](https://spleet-url-shortener.herokuapp.com/)
 
-To use this application, follow these steps:
+To run this application locally, follow steps 1-5.
+If you do not want to set up the application locally, go to step 5.
 
 1. Clone the repo `git clone https://github.com/adebay8/spleet-url-shortener.git`
 
